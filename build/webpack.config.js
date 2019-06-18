@@ -39,6 +39,8 @@ const config = {
     extensions: ['*', '.web.tsx', '.web.ts', '.web.js', '.js', '.jsx', '.json', '.scss', '.jpg', '.png'],
     alias: {
       '@': resolve(srcDir),
+      pages:resolve(`${srcDir}/routes`),
+      layout:resolve(`${srcDir}/pageLayout`)
     }
   },
   externals,

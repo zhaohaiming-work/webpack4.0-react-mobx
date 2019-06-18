@@ -1,19 +1,21 @@
 import './styles'
 import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
-import Login from './routes/login'
-import Home from './routes/home'
+import Login from 'pages/login'
+import Home from 'pages/Home'
+import PageLayout from 'layout'
 class App extends React.Component {
-  log=() => {
-    console.log(999)
-  }
   render () {
     return (
       <React.Fragment>
         <HashRouter>
           <Switch>
             <Route path='/login' component={Login} />
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={({ match }) => (
+              <PageLayout>
+                <Route exact path={match.url} component={Home} />
+              </PageLayout>
+            )} />
           </Switch>
         </HashRouter>
       </React.Fragment>
