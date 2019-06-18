@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "history": "^4.9.0",
+    "mobx": "^5.10.1",
+    "mobx-react": "^6.0.3",
     "object-assign": "^4.1.1",
     "promise": "^7.1.1",
     "prop-types": "^15.7.2",
