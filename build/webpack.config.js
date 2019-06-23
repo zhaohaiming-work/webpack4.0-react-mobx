@@ -39,8 +39,11 @@ const config = {
     extensions: ['*', '.web.tsx', '.web.ts', '.web.js', '.js', '.jsx', '.json', '.scss', '.jpg', '.png'],
     alias: {
       '@': resolve(srcDir),
-      pages:resolve(`${srcDir}/routes`),
-      layout:resolve(`${srcDir}/pageLayout`)
+      pages: resolve(`${srcDir}/routes`),
+      layout: resolve(`${srcDir}/pageLayout`),
+      components: resolve(`${srcDir}/components`),
+      mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.es6.js'),
+      store:resolve(`${srcDir}/mobx/index`)
     }
   },
   externals,
@@ -68,7 +71,10 @@ config.module.rules.push({
         plugins: [
           '@babel/plugin-syntax-dynamic-import',
           '@babel/plugin-proposal-export-default-from',
-          '@babel/plugin-proposal-class-properties'
+          ["@babel/plugin-proposal-decorators", { 'legacy': true }],
+          ['@babel/plugin-proposal-class-properties', {
+            "loose": true
+          }],
         ],
         presets: [
           '@babel/preset-react',
@@ -76,13 +82,14 @@ config.module.rules.push({
         ]
       }
     },
-    {
-      loader: 'eslint-loader',
-      options: {
-        fix: true,
-        formatter: require('eslint/lib/formatters/stylish')
-      },
-    }
+    // {
+    //   loader: 'eslint-loader',
+    //   options: {
+    //     fix: true,
+    //     quiet: true,
+    //     formatter: require('eslint/lib/formatters/stylish')
+    //   },
+    // }
   ]
 })
 // css
@@ -130,28 +137,27 @@ config.module.rules.push({
     name: 'images/[name]-[hash].[ext]'
   },
 })
-// font and svg
-;[
-  ['woff', 'application/font-woff'],
-  ['woff2', 'application/font-woff2'],
-  ['otf', 'font/opentype'],
-  ['ttf', 'application/octet-stream'],
-  ['eot', 'application/vnd.ms-fontobject'],
-  ['svg', 'image/svg+xml'],
-].forEach((font) => {
-  const extension = font[0]
-  const mimetype = font[1]
-
-  config.module.rules.push({
-    test: new RegExp(`\\.${extension}$`),
-    loader: 'url-loader',
-    options: {
-      name: 'fonts/[name]-[hash].[ext]',
-      limit: 10000,
-      mimetype,
-    },
+  // font and svg
+  ;[
+    ['woff', 'application/font-woff'],
+    ['woff2', 'application/font-woff2'],
+    ['otf', 'font/opentype'],
+    ['ttf', 'application/octet-stream'],
+    ['eot', 'application/vnd.ms-fontobject'],
+    ['svg', 'image/svg+xml'],
+  ].forEach((font) => {
+    const extension = font[0]
+    const mimetype = font[1]
+    config.module.rules.push({
+      test: new RegExp(`\\.${extension}$`),
+      loader: 'url-loader',
+      options: {
+        name: 'fonts/[name]-[hash].[ext]',
+        limit: 10000,
+        mimetype,
+      },
+    })
   })
-})
 // server
 if (__DEV__) {
   config.entry.main.push(
@@ -169,18 +175,12 @@ config.optimization = {
       // 抽离第三方插件
       vendors: {
         chunks: 'all',
-        test: new RegExp(`(${vendors.join('|')})`),
+        test: /[\\/]node_modules[\\/]/,
         priority: 100,
         name: 'vendors',
       },
-      // 异步加载公共包、组件等
-      'async-commons': {
-        chunks: 'async',
-        minChunks: 2,
-        name: 'async-commons',
-        priority: 90,
-      },
-      commons: { // 其他同步加载公共包
+      // 其他同步加载公共包
+      commons: {
         chunks: 'all',
         minChunks: 2,
         name: 'commons',
