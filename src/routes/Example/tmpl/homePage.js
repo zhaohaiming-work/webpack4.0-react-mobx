@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
-import { Button, Tag } from 'antd'
+import { Button, Tag, Pagination, Rate } from 'antd'
 import '../style'
 @inject('example')
 @observer
@@ -31,6 +31,10 @@ class App extends React.Component {
         <div>春光美</div>
         <Tag>Tag 1</Tag>
         <Button type='primary' onClick={add}>点我</Button>
+        <div>
+          <Pagination defaultCurrent={1} total={500} showSizeChanger />
+        </div>
+        <div className='pd-20'><Rate /></div>
       </div>
     )
   }
