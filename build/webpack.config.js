@@ -3,7 +3,13 @@ const webpack = require('webpack')
 const { env, basePath, externals, main,
   publicPath, globals, outDir, srcDir,
   sourcemaps } = require('../project.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 const inProject = path.resolve.bind(path, basePath)
 const inProjectSrc = (file) => inProject(srcDir, file)
 // 各类非 js 直接引用（import require）静态资源，依赖相对路径加载问题，都可以用 ~ 语法完美解决；
@@ -11,7 +17,7 @@ const resolve = dir => path.join(__dirname, '..', dir)
 const __DEV__ = env === 'development'
 const __TEST__ = env === 'test'
 const __PROD__ = env === 'production'
-
+const extensions = ['*', '.web.tsx', '.web.ts', '.web.js', '.js', '.jsx', '.json', '.scss', '.jpg', '.png']
 const config = {
   mode: env,
   entry: {
@@ -39,7 +45,7 @@ const config = {
       inProject(srcDir),
       'node_modules',
     ],
-    extensions: ['*', '.web.tsx', '.web.ts', '.web.js', '.js', '.jsx', '.json', '.scss', '.jpg', '.png'],
+    extensions,
     alias: {
       '@': resolve(srcDir),
       pages: resolve(`${srcDir}/routes`),
@@ -67,37 +73,39 @@ const config = {
 config.module.rules.push({
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
-  use: [
-    {
-      loader: 'babel-loader',
-      options: {
-        plugins: [
-          '@babel/plugin-syntax-dynamic-import',
-          '@babel/plugin-proposal-export-default-from',
-          ["@babel/plugin-proposal-decorators", { legacy: true }],
-          ['@babel/plugin-proposal-class-properties', { loose: true }],
-          ['import', {
-            libraryName: 'antd',
-            libraryDirectory: 'es',
-            style: 'css' // `style: true` 会加载 less 文件
-          }]
-        ],
-        presets: [
-          '@babel/preset-react',
-          '@babel/preset-env',
-        ]
-      }
-    },
-    // {
-    //   loader: 'eslint-loader',
-    //   options: {
-    //     fix: true,
-    //     quiet: true,
-    //     formatter: require('eslint/lib/formatters/stylish')
-    //   },
-    // }
-  ]
+  loader: 'happypack/loader?id=happyBabel',
 })
+const babelLoader = {
+  loader: 'babel-loader',
+  options: {
+    plugins: [
+      '@babel/plugin-syntax-dynamic-import',
+      '@babel/plugin-proposal-export-default-from',
+      '@babel/plugin-transform-runtime',
+      ["@babel/plugin-proposal-decorators", { legacy: true }],
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['import', {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css'
+      }]
+    ],
+    presets: [
+      '@babel/preset-react',
+      '@babel/preset-env',
+    ]
+  }
+}
+// js happypack
+config.plugins.push(
+  new HappyPack({
+    id: 'happyBabel',
+    loaders: [babelLoader],
+    //共享进程池
+    threadPool: happyThreadPool,
+    verbose: false,
+  })
+)
 // css
 config.module.rules.push({
   test: /\.(sa|sc|c)ss$/,
@@ -119,14 +127,7 @@ config.module.rules.push({
     }
   ]
 })
-
-config.plugins.push(new MiniCssExtractPlugin({
-  filename: __DEV__ ? 'css/[name].css' : 'css/[name].[contenthash].css',
-  chunkFilename: __DEV__ ? 'css/[id].css' : 'css/[id].[hash].css'
-}))
-
 // html
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 config.plugins.push(new HtmlWebpackPlugin({
   template: inProjectSrc('index.html'),
   inject: true,
@@ -164,7 +165,7 @@ config.module.rules.push({
       },
     })
   })
-// server
+// hot server
 if (__DEV__) {
   config.entry.main.push(
     `webpack-hot-middleware/client.js?path=${config.output.publicPath}__webpack_hmr`
@@ -195,7 +196,35 @@ config.optimization = {
     }
   }
 }
+
 if (__PROD__) {
+  config.optimization.minimizer = [
+    //mini js
+    new TerserPlugin({
+      terserOptions: {
+        ecma: undefined,
+        warnings: false,
+        parse: {},
+        compress: {},
+        mangle: true,
+        module: false,
+        output: null,
+        toplevel: false,
+        nameCache: null,
+        ie8: false,
+        keep_classnames: undefined,
+        keep_fnames: false,
+        safari10: false,
+      },
+    }),
+    //mini css
+    new OptimizeCSSAssetsPlugin({})
+  ]
+  //separate css
+  config.plugins.push(new MiniCssExtractPlugin({
+    filename: __DEV__ ? 'css/[name].css' : 'css/[name].[contenthash].css',
+    chunkFilename: __DEV__ ? 'css/[id].css' : 'css/[id].[hash].css'
+  }))
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -205,6 +234,8 @@ if (__PROD__) {
       }
     }),
   )
-  config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+  config.plugins.push(
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  )
 }
 module.exports = config

@@ -30,6 +30,7 @@ class App extends React.Component {
         <Button onClick={add}>点我</Button>
         <div>春光美</div>
         <Tag>Tag 1</Tag>
+        <Button type='primary' onClick={add}>点我</Button>
       </div>
     )
   }

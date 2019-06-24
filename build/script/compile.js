@@ -5,7 +5,6 @@ const webpack = require('webpack')
 const logger = require('../logger')
 const webpackConfig = require('../webpack.config')
 const project = require('../../project.config')
-
 const runWebpackCompiler = (wkConfig) =>{
   new Promise((resolve, reject) => {
     webpack(wkConfig).run((err, stats) => {
