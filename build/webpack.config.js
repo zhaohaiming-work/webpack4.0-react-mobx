@@ -2,9 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { env, basePath, externals, main,
   publicPath, globals, outDir, srcDir,
-  sourcemaps, vendors, } = require('../project.config')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+  sourcemaps } = require('../project.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const inProject = path.resolve.bind(path, basePath)
 const inProjectSrc = (file) => inProject(srcDir, file)
@@ -23,6 +21,11 @@ const config = {
     main: [
       inProjectSrc(main),
     ],
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   devtool: sourcemaps ? 'cheap-module-eval-source-map' : false,
   output: {
@@ -73,6 +76,11 @@ config.module.rules.push({
           '@babel/plugin-proposal-export-default-from',
           ["@babel/plugin-proposal-decorators", { legacy: true }],
           ['@babel/plugin-proposal-class-properties', { loose: true }],
+          ['import', {
+            libraryName: 'antd',
+            libraryDirectory: 'es',
+            style: 'css' // `style: true` 会加载 less 文件
+          }]
         ],
         presets: [
           '@babel/preset-react',
@@ -188,15 +196,6 @@ config.optimization = {
   }
 }
 if (__PROD__) {
-  // 生产环境压缩js和css 覆盖默认压缩功能
-  config.optimization.minimizer = [
-    new UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      sourceMap: sourcemaps
-    }),
-    new OptimizeCSSAssetsPlugin({})
-  ]
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -206,5 +205,6 @@ if (__PROD__) {
       }
     }),
   )
+  config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
 }
 module.exports = config

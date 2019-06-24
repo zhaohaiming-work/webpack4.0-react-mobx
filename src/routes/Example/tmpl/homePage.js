@@ -1,6 +1,7 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
+import { Button, Tag } from 'antd'
 import '../style'
 @inject('example')
 @observer
@@ -26,7 +27,9 @@ class App extends React.Component {
         <div className='box'>
           {count}
         </div>
-        <button onClick={add}>点我</button>
+        <Button onClick={add}>点我</Button>
+        <div>春光美</div>
+        <Tag>Tag 1</Tag>
       </div>
     )
   }
