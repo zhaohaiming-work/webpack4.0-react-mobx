@@ -11,12 +11,13 @@ class App extends React.Component {
   }
   componentDidMount () {
     console.log(this.props)
+    this.props.example.getDate()
   }
-  add=() => {
+  add = () => {
 
   }
   render () {
-    const { todos, count, add } = this.props.example
+    const { todos, count, add, dateList } = this.props.example
     return (
       <div>
         {
@@ -28,13 +29,11 @@ class App extends React.Component {
           {count}
         </div>
         <Button onClick={add}>点我</Button>
-        <div>春光美</div>
         <Tag>Tag 1</Tag>
         <Button type='primary' onClick={add}>点我</Button>
-        <div>
-          <Pagination defaultCurrent={1} total={500} showSizeChanger />
+        <div className='pd-10'>
+          {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
         </div>
-        <div className='pd-20'><Rate /></div>
       </div>
     )
   }

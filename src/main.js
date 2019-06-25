@@ -26,6 +26,7 @@ if (__DEV__) {
     }
     module.hot.accept([
       './App',
+      './mobx'
     ], () => Promise.resolve()
       .then(() => ReactDOM.unmountComponentAtNode(EL))
       .then(render)

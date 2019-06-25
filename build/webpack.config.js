@@ -28,6 +28,7 @@ const config = {
       inProjectSrc(main),
     ],
   },
+  // Remove size waring
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
@@ -52,7 +53,9 @@ const config = {
       layout: resolve(`${srcDir}/pageLayout`),
       components: resolve(`${srcDir}/components`),
       mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.es6.js'),
-      store: resolve(`${srcDir}/mobx/index`)
+      store: resolve(`${srcDir}/mobx/index`),
+      imgage: resolve(`${srcDir}/images`),
+      api: resolve(`${srcDir}/api`),
     }
   },
   externals,
@@ -114,7 +117,12 @@ config.module.rules.push({
     {
       loader: __DEV__ ? 'style-loader' : MiniCssExtractPlugin.loader,
     },
-    'css-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1
+      }
+    },
     'postcss-loader',
     {
       loader: 'sass-loader',
@@ -181,10 +189,10 @@ config.optimization = {
     cacheGroups: {
       // 抽离第三方插件
       vendors: {
-        chunks: 'all',
         test: /[\\/]node_modules[\\/]/,
-        priority: 100,
         name: 'vendors',
+        enforce: true,
+        chunks: 'all'
       },
       // 其他同步加载公共包
       commons: {
@@ -196,7 +204,10 @@ config.optimization = {
     }
   }
 }
-
+// moment 去除语言包，减少体积
+config.plugins.push(
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+)
 if (__PROD__) {
   config.optimization.minimizer = [
     //mini js
@@ -233,9 +244,6 @@ if (__PROD__) {
         context: __dirname
       }
     }),
-  )
-  config.plugins.push(
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   )
 }
 module.exports = config
