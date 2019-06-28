@@ -3,7 +3,7 @@ import example from './example'
 // 接口模块
 
 // 实例化 ajax请求对象
-export const ajaxinstance = axios.create({
+const ajaxinstance = axios.create({
   baseURL: 'http://172.28.138.54:1442',
   timeout: 60000,
   headers: {
@@ -38,5 +38,5 @@ ajaxinstance
 const API = {
   ...example
 }
-
+export const ajax = ajaxinstance
 export default API

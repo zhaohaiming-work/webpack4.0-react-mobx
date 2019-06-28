@@ -1,7 +1,7 @@
-import { ajaxinstance } from './'
+import { ajax } from './'
 class Xhr {
   getChainDate = (postData = {}) => (
-    ajaxinstance.get('/asset2/api/project/chainDateList', { params: postData })
+    ajax.get('/asset2/api/project/chainDateList', { params: postData })
   )
 }
 

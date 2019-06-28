@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
-import { Button, Tag, Pagination, Rate } from 'antd'
+import { Button, Tag } from 'antd'
 import '../style'
 @inject('example')
 @observer
@@ -33,6 +33,9 @@ class App extends React.Component {
         <Button type='primary' onClick={add}>点我</Button>
         <div className='pd-10'>
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
+        </div>
+        <div>
+          你说嘴巴嘟嘟，读一下你就回来呀
         </div>
       </div>
     )
