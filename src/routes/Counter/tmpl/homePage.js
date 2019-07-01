@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'antd'
 class App extends React.Component {
   log = () => {
     console.log('不要点我')
@@ -6,11 +7,11 @@ class App extends React.Component {
   render () {
     return (
       <React.Fragment>
-        我是测试用的counter
-        我是一颗小小的石头
         你是我一生最爱的人
-        偏偏无情却伤我最深
-        白色的恋人
+        <div>
+          <Button>点我</Button>
+          <Button>点我</Button>
+        </div>
       </React.Fragment>
     )
   }

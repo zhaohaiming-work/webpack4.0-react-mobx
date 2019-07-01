@@ -17,7 +17,7 @@ class App extends React.Component {
 
   }
   render () {
-    const { todos, count, add, dateList } = this.props.example
+    const { todos, count, add, dateList, unfinishedTodos } = this.props.example
     return (
       <div>
         {
@@ -25,8 +25,16 @@ class App extends React.Component {
             return <div key={v.title}>{v.title}</div>
           })
         }
+
         <div className='box'>
           {count}
+        </div>
+        <div>
+          {
+            unfinishedTodos.map(v => {
+              return <section key={v.title}>{v.title}</section>
+            })
+          }
         </div>
         <Button onClick={add}>点我</Button>
         <Tag>Tag 1</Tag>
@@ -35,7 +43,14 @@ class App extends React.Component {
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
         </div>
         <div>
-          你说嘴巴嘟嘟，读一下你就回来呀
+          <Button>你说嘴巴嘟嘟</Button>
+        </div>
+        <div>
+          <Tag>你说嘴巴嘟嘟</Tag>
+          <Tag>面筋哥哥</Tag>
+        </div>
+        <div>
+          毛弟
         </div>
       </div>
     )
