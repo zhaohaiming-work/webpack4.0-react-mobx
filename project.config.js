@@ -1,6 +1,6 @@
 const ip = require('ip')
 const NODE_ENV = process.env.NODE_ENV || 'development'
-const port = '1111'
+const port = '1314'
 module.exports = {
   ip,
   port,

@@ -1,2 +1,2 @@
-import createHistory from 'history/createHashHistory'
-export const history = createHistory()
+import { createHashHistory } from 'history'
+export const history = createHashHistory()
