@@ -54,7 +54,7 @@ const config = {
       components: resolve(`${srcDir}/components`),
       mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.es6.js'),
       store: resolve(`${srcDir}/mobx/index`),
-      imgage: resolve(`${srcDir}/images`),
+      img: resolve(`${srcDir}/images`),
       api: resolve(`${srcDir}/api`),
       func: resolve(`${srcDir}/func`)
     }
