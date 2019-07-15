@@ -1,6 +1,6 @@
 import React from 'react'
 import './home.scss'
-import { history } from 'func'
+// import { history } from 'func'
 class App extends React.Component {
   log = () => {
     console.log('不要点我')
@@ -11,7 +11,7 @@ class App extends React.Component {
         <div>
           你可以用他做任何事情
         </div>
-        <button onClick={() => history.push('/login')}>
+        <button>
           点我
         </button>
       </React.Fragment>
