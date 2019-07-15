@@ -1,16 +1,14 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
+import mergeRoute from 'components/mergeRoutes'
 const Home = React.lazy(() => import('./tmpl/homePage'))
-const Router = ({ match }) => {
-  return (
-    <React.Fragment>
-      <Route exact path={`${match.url}`} component={Home} />
-    </React.Fragment>
-  )
-}
-Router.propTypes = {
-  match: PropTypes.object
-}
-export default Router
+const Test = React.lazy(() => import('./tmpl/test'))
+export default mergeRoute([
+  {
+    path: '/example',
+    tmpl: Home
+  },
+  {
+    path: '/example/test',
+    tmpl: Test
+  },
+])

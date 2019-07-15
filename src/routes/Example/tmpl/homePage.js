@@ -46,7 +46,7 @@ class App extends React.Component {
           <Button>你说嘴巴嘟嘟</Button>
         </div>
         <div>
-          <Tag>你说嘴巴嘟嘟</Tag>
+          {/* <Tag>你说嘴巴嘟嘟</Tag> */}
           <Tag>面筋哥哥</Tag>
         </div>
         <div>
