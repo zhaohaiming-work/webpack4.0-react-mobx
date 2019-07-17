@@ -11,7 +11,7 @@ class App extends React.Component {
   }
   componentDidMount () {
     console.log(this.props)
-    this.props.example.getDate()
+    // this.props.example.getDate()
   }
   add = () => {
 
@@ -25,7 +25,6 @@ class App extends React.Component {
             return <div key={v.title}>{v.title}</div>
           })
         }
-
         <div className='box'>
           {count}
         </div>
@@ -36,21 +35,11 @@ class App extends React.Component {
             })
           }
         </div>
-        <Button onClick={add}>点我</Button>
+        {/* <Button onClick={add}>点我</Button> */}
         <Tag>Tag 1</Tag>
         <Button type='primary' onClick={add}>点我</Button>
         <div className='pd-10'>
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
-        </div>
-        <div>
-          <Button>你说嘴巴嘟嘟</Button>
-        </div>
-        <div>
-          {/* <Tag>你说嘴巴嘟嘟</Tag> */}
-          <Tag>面筋哥哥</Tag>
-        </div>
-        <div>
-          毛弟
         </div>
       </div>
     )
