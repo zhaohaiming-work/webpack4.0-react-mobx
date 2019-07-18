@@ -209,6 +209,10 @@ config.optimization = {
 config.plugins.push(
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 )
+// 碰到错误warning但是不停止编译
+config.plugins.push(
+  new webpack.NoEmitOnErrorsPlugin()
+)
 if (__PROD__) {
   config.optimization.minimizer = [
     //mini js
