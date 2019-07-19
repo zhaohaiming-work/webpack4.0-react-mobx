@@ -56,7 +56,9 @@ const config = {
       store: resolve(`${srcDir}/mobx/index`),
       img: resolve(`${srcDir}/images`),
       api: resolve(`${srcDir}/api`),
-      func: resolve(`${srcDir}/func`)
+      func: resolve(`${srcDir}/func`),
+      mixin:resolve(`${srcDir}/styles/_mixin.scss`),
+      style:resolve(`${srcDir}/styles`)
     }
   },
   externals,

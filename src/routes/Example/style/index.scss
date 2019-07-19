@@ -4,18 +4,3 @@
   background: red;
 }
 
-.loading-process {
-  height: 2px;
-  background: #1890ff;
-  width: 100%;
-  animation: myfirst 1s linear infinite;
-}
-
-@keyframes myfirst {
-  from {
-    width: 0;
-  }
-  to {
-    background: 100%;
-  }
-}
