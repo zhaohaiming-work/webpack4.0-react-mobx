@@ -17,6 +17,23 @@ body *::after
   box-sizing: inherit;
   -webkit-overflow-scrolling: touch;
 }
+
+.loading-process {
+  height: 2px;
+  background: #1890ff;
+  width: 100%;
+  animation: myfirst 0.2s linear infinite;
+}
+
+@keyframes myfirst {
+  from {
+    width: 0;
+  }
+  to {
+    background: 100%;
+  }
+}
+
 //类的循环为5的倍数
 //margin
 @for $i from 1 through 5 {

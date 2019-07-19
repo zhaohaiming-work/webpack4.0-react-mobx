@@ -1,5 +1,5 @@
 import React from 'react'
 // import propTypes from 'prop-types'
-const OverLoadTmpl = <div>loading...</div>
+const OverLoadTmpl = <div className='loading-process' />
 
 export default OverLoadTmpl

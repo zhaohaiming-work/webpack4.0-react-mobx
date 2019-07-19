@@ -42,6 +42,7 @@ class App extends React.Component {
         <div className='pd-10'>
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
         </div>
+        <div className='loading-process' />
       </div>
     )
   }
