@@ -54,7 +54,7 @@ const config = {
       components: resolve(`${srcDir}/components`),
       mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.es6.js'),
       store: resolve(`${srcDir}/mobx/index`),
-      imgage: resolve(`${srcDir}/images`),
+      img: resolve(`${srcDir}/images`),
       api: resolve(`${srcDir}/api`),
     }
   },
@@ -206,6 +206,10 @@ config.optimization = {
 // moment 去除语言包，减少体积
 config.plugins.push(
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+)
+// 碰到错误warning但是不停止编译
+config.plugins.push(
+  new webpack.NoEmitOnErrorsPlugin()
 )
 if (__PROD__) {
   config.optimization.minimizer = [
