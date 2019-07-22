@@ -1,7 +1,6 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
-import { Button, Tag } from 'antd'
 import '../style'
 @inject('example')
 @observer
@@ -17,7 +16,7 @@ class App extends React.Component {
 
   }
   render () {
-    const { todos, count, add, dateList, unfinishedTodos } = this.props.example
+    // const { todos, count, add, dateList, unfinishedTodos } = this.props.example
     return (
       <div>
         测试页面

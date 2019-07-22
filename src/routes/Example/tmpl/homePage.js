@@ -1,13 +1,12 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
-import PropTypes from 'prop-types'
-import { Button, Tag } from 'antd'
+// import PropTypes from 'prop-types'
 import '../style'
 @inject('example')
 @observer
 class App extends React.Component {
   static propTypes = {
-    example: PropTypes.object
+    // example: PropTypes.object
   }
   componentDidMount () {
     console.log(this.props)
@@ -17,11 +16,11 @@ class App extends React.Component {
 
   }
   render () {
-    const { todos, count, add, dateList, unfinishedTodos } = this.props.example
+    // const { todos, count, add, dateList, unfinishedTodos } = this.props.example
 
     return (
       <div>
-        {
+        {/* {
           todos.map(v => {
             return <div key={v.title}>{v.title}</div>
           })
@@ -35,13 +34,8 @@ class App extends React.Component {
               return <section key={v.title}>{v.title}</section>
             })
           }
-        </div>
-        {/* <Button onClick={add}>点我</Button> */}
-        {/* <Tag>Tag 1</Tag> */}
-        <Button type='primary' onClick={add}>点我</Button>
-        <div className='pd-10'>
-          {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
-        </div>
+        </div> */}
+        举个列子
       </div>
     )
   }

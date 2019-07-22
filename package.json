@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "compile": "node build/script/compile",
+    "compile": "node config/script/compile",
     "build": "npm run clean && cross-env NODE_ENV=production npm run compile",
-    "start": "cross-env NODE_ENV=development node build/script/start",
+    "start": "cross-env NODE_ENV=development node config/script/start",
     "lint": "eslint --ext .js src/",
     "lint:fix": "eslint --fix --ext .js --ext .jsx src/"
   },
@@ -15,7 +15,6 @@
   "author": "haiming.zhao",
   "license": "ISC",
   "dependencies": {
-    "antd": "^3.19.8",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.0",
     "history": "^4.9.0",
