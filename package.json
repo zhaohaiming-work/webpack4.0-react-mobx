@@ -81,6 +81,7 @@
     "webpack": "^4.31.0",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-dev-server": "^3.7.1",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "file-loader": "^4.0.0"
   }
 }
