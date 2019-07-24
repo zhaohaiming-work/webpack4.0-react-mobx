@@ -1,7 +1,9 @@
 const port = require('../../project.config').port
 const logger = require('../logger')
 const ip = require('ip')
+const open = require('open')
 logger.info('Starting server...')
 require('../server').listen(port, () => {
   logger.success('Server is running at http://' + ip.address() + `:${port}`)
+  open('http://' + ip.address() + `:${port}`)
 })
