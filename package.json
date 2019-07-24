@@ -68,6 +68,7 @@
     "ip": "^1.1.5",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.5.3",
+    "open": "^6.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
