@@ -5,7 +5,6 @@ function portIsOccupied(port) {
   const server = net.createServer().listen(port);
   return new Promise((resolve, reject) => {
     server.on('listening', () => {
-      logger.info(`the server is runnint on port ${port}`)
       server.close()
       resolve(port)
     });
