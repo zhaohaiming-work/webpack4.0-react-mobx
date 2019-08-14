@@ -3,7 +3,7 @@
    2) Promise
    3) Fetch
 ====================================================== */
-
+import 'babel-polyfill'
 // 1) Object.assign
 Object.assign = require('object-assign')
 
@@ -19,3 +19,5 @@ if (typeof Promise === 'undefined') {
 if (typeof window.fetch === 'undefined') {
   require('whatwg-fetch')
 }
+// 4)symbol
+require('es6-symbol/implement')
