@@ -17,7 +17,6 @@ module.exports = {
   vendors: [
     'react',
     'react-dom',
-    'redux-thunk',
     'react-router-dom'
   ]
 }
