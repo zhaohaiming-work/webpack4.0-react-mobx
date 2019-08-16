@@ -19,5 +19,3 @@ if (typeof Promise === 'undefined') {
 if (typeof window.fetch === 'undefined') {
   require('whatwg-fetch')
 }
-// 4)symbol
-require('es6-symbol/implement')

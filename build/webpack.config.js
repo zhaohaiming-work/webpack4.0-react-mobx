@@ -52,13 +52,13 @@ const config = {
       pages: resolve(`${srcDir}/routes`),
       layout: resolve(`${srcDir}/pageLayout`),
       components: resolve(`${srcDir}/components`),
-      mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.es6.js'),
+      mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.js'),
       store: resolve(`${srcDir}/mobx/index`),
       img: resolve(`${srcDir}/images`),
       api: resolve(`${srcDir}/api`),
       func: resolve(`${srcDir}/func`),
-      mixin:resolve(`${srcDir}/styles/_mixin.scss`),
-      style:resolve(`${srcDir}/styles`)
+      mixin: resolve(`${srcDir}/styles/_mixin.scss`),
+      style: resolve(`${srcDir}/styles`)
     }
   },
   externals,
@@ -97,8 +97,20 @@ const babelLoader = {
       }]
     ],
     presets: [
-      '@babel/preset-react',
-      '@babel/preset-env',
+      ['@babel/preset-react'],
+      ['@babel/preset-env', {
+        modules: false,
+        loose: true,
+        // useBuiltIns: "usage",
+        targets: {
+          ie: 9,
+          browsers: [
+            'last 5 versions',
+            'safari >= 7',
+            'not ie < 9'
+          ]
+        }
+      }],
     ]
   }
 }
