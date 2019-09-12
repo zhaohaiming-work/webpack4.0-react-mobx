@@ -23,6 +23,7 @@
     "mobx": "^4.8.0",
     "mobx-react": "^6.1.1",
     "mobx-react-lite": "^1.4.1",
+    "nprogress": "^0.2.0",
     "object-assign": "^4.1.1",
     "promise": "^7.1.1",
     "prop-types": "^15.7.2",
