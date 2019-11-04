@@ -37,7 +37,7 @@ class App extends React.Component {
           }
         </div>
         {/* <Button onClick={add}>点我</Button> */}
-        {/* <Tag>Tag 1</Tag> */}
+        <Tag>Tag 1</Tag>
         <Button type='primary' onClick={add}>点我</Button>
         <div className='pd-10'>
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}

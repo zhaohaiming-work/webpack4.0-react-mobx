@@ -1,7 +1,7 @@
 import './styles'
 import React, { Suspense, lazy } from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
-import { LocaleProvider } from 'antd'
+import { ConfigProvider } from 'antd'
 import Loadable from 'components/loadable'
 import store from 'store'
 import { Provider } from 'mobx-react'
@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Provider {...store}>
-          <LocaleProvider locale={zhCN}>
+          <ConfigProvider locale={zhCN}>
             <HashRouter>
               <Suspense fallback={Loadable}>
                 <Switch>
@@ -29,7 +29,7 @@ class App extends React.Component {
                 </Switch>
               </Suspense>
             </HashRouter>
-          </LocaleProvider>
+          </ConfigProvider>
         </Provider>
       </React.Fragment>
     )
