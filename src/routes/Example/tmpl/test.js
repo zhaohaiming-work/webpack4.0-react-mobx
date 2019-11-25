@@ -1,28 +1,57 @@
-import React from 'react'
-import { observer, inject } from 'mobx-react'
-import PropTypes from 'prop-types'
-import { Button, Tag } from 'antd'
-import '../style'
-@inject('example')
-@observer
-class App extends React.Component {
-  static propTypes = {
-    example: PropTypes.object
-  }
-  componentDidMount () {
-    console.log(this.props)
-    this.props.example.getDate()
-  }
-  add = () => {
 
-  }
+import React, { useState, useContext } from 'react'
+import { HashRouter, Route, Switch } from 'react-router-dom'
+
+const AppContext = React.createContext({ title: '啦啦啦啦' })
+const Navbar = () => {
+  const { username } = useContext(AppContext)
+  return (
+    <div className='navbar'>
+      <p>我的名字是：</p>
+      <p>{username}</p>
+    </div>
+  )
+}
+class ThemedButton extends React.Component {
+  // 指定 contextType 读取当前的 theme context。
+  // React 会往上找到最近的 theme Provider，然后使用它的值。
+  // 在这个例子中，当前的 theme 值为 “dark”。
+  static contextType = AppContext;
   render () {
-    const { todos, count, add, dateList, unfinishedTodos } = this.props.example
-    return (
-      <div>
-        测试页面
-      </div>
-    )
+    console.log(this.context)
+    return <p>{this.context.title}</p>
   }
 }
-export default App
+// 中间的组件再也不必指明往下传递 theme 了。
+function Toolbar (props) {
+  return (
+    <div>
+      <ThemedButton />
+      <Route path='/example/test' component={() => {
+        return (
+          <div>测试页面</div>
+        )
+      }} />
+    </div>
+  )
+}
+export default function Button ({ name }) {
+  const [buttonText, setButtonText] = useState('Click me,   please')
+  const handleClick = () => {
+    console.log(this)
+    setButtonText('Thanks, been clicked!')
+  }
+
+  return <div>
+    <AppContext.Provider value={{
+      username: 'superawesome',
+      title: '大神'
+    }}>
+      <div className='App'>
+        <Navbar />
+        <Toolbar />
+      </div>
+    </AppContext.Provider>
+    <button onClick={handleClick}>{buttonText}{name}</button>
+  </div>
+}
