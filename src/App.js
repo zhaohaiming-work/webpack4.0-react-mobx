@@ -10,6 +10,7 @@ import PageLayout from 'layout'
 import Base from './routes'
 import zhCN from 'antd/es/locale-provider/zh_CN'
 const Login = lazy(() => import('./routes/Login/index'))
+const NotFound = lazy(() => import('components/404'))
 class App extends React.Component {
   render () {
     return (
@@ -19,11 +20,14 @@ class App extends React.Component {
             <HashRouter>
               <Suspense fallback={Loadable}>
                 <Switch>
-                  <Route path='/login' component={Login} />
+                  <Route exact path='/login' component={Login} />
                   <Route path='/' component={({ match }) => (
                     <PageLayout>
-                      <Route exact path={match.url} component={Home} />
-                      {Base}
+                      <Switch>
+                        <Route exact path={match.url} component={Home} />
+                        {Base}
+                        <Route component={NotFound} />
+                      </Switch>
                     </PageLayout>
                   )} />
                 </Switch>
