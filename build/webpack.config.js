@@ -118,7 +118,7 @@ const babelLoader = {
 config.plugins.push(
   new HappyPack({
     id: 'happyBabel',
-    cache: false,
+    //cache: false,
     loaders: [babelLoader],
     //共享进程池
     threadPool: happyThreadPool,
