@@ -9,12 +9,13 @@ import Home from 'pages/Home'
 import PageLayout from 'layout'
 import Base from './routes'
 import zhCN from 'antd/es/locale-provider/zh_CN'
+import ErrorBoundary from 'components/errorBoundary'
 const Login = lazy(() => import('./routes/Login/index'))
 const NotFound = lazy(() => import('components/404'))
-class App extends React.Component {
+class App extends React.PureComponent {
   render () {
     return (
-      <React.Fragment>
+      <ErrorBoundary>
         <Provider {...store}>
           <ConfigProvider locale={zhCN}>
             <HashRouter>
@@ -35,7 +36,7 @@ class App extends React.Component {
             </HashRouter>
           </ConfigProvider>
         </Provider>
-      </React.Fragment>
+      </ErrorBoundary>
     )
   }
 }

@@ -22,7 +22,6 @@ class App extends React.Component {
 
     return (
       <div>
-
         <Test name='传进来的值' />
         {/* <Tag>Tag 1</Tag> */}
         <Button type='primary' onClick={add}>点我</Button>
