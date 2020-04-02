@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
-import { Button, Tag } from 'antd'
+import { Button, Tag, Input } from 'antd'
 import '../style'
 import Test from './test'
 @inject('example')
@@ -24,7 +24,8 @@ class App extends React.Component {
       <div>
         <Test name='传进来的值' />
         {/* <Tag>Tag 1</Tag> */}
-        <Button type='primary' onClick={add}>点我</Button>
+        <Input placeholder='Basic usage' />
+        <Button onClick={add}>点我</Button>
         <div className='pd-10'>
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
         </div>

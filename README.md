@@ -39,3 +39,27 @@
    npm build
 
  ```
+ * 项目目录
+ ```bash
+build               webpack配置目录
+src                 整体资源目录
+public              静态文件目录
+src/api             api请求路径
+src/components      公用模板目录
+src/func            工具类函数库
+src/mobx            mobx配置
+src/routes          页面级路由
+src/styles          公用的样式
+src/App.js          根组件
+src/index.html      模板文件
+src/main.js         入口文件
+src/normalize.js    polyfill库
+ ```
+ * 项目规范
+
+ ```
+ 1、class样式用'-'隔开
+ 2、js变量用驼峰命名法
+ 3、页面级路由采用首字母大写
+ 4、文件名命名采用驼峰
+ ```
