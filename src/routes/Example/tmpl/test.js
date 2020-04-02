@@ -44,7 +44,7 @@ export default function Button ({ name }) {
 
   return <div>
     <AppContext.Provider value={{
-      username: 'superawesome',
+      username: '小金猪',
       title: '大神'
     }}>
       <div className='App'>

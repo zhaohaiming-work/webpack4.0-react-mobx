@@ -7,6 +7,6 @@ logger.info('Starting server...')
 portIsOccupied(port).then((p) => {
   require('../server').listen(p, () => {
     logger.success('Server is running at http://' + ip.address() + `:${p}`)
-    open('http://' + ip.address() + `:${p}`)
+    // open('http://' + ip.address() + `:${p}`)
   })
 })

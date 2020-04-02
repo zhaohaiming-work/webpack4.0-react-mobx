@@ -5,6 +5,8 @@ const logger = require('./logger')
 const webpackConfig = require('./webpack.config')
 const project = require('../project.config')
 const compress = require('compression')
+const proxy = require('http-proxy-middleware')
+const { proxyApiPathArr, proxyHost } = project
 const app = express()
 app.use(compress())
 if (project.env === 'development') {
@@ -25,6 +27,9 @@ if (project.env === 'development') {
   }))
 
   app.use(express.static(path.resolve(project.basePath, 'public')))
+  proxyApiPathArr.map((v) => {
+    app.use(proxy(`/${v}`, { target: proxyHost, changeOrigin: true }))
+  })
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {

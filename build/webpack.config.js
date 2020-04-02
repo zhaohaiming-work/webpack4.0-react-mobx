@@ -88,7 +88,7 @@ const babelLoader = {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-transform-runtime',
-      ["@babel/plugin-proposal-decorators", { legacy: true }],
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       ['import', {
         libraryName: 'antd',
@@ -118,9 +118,9 @@ const babelLoader = {
 config.plugins.push(
   new HappyPack({
     id: 'happyBabel',
-    cache: __DEV__,
+    // cache: __DEV__,
     loaders: [babelLoader],
-    //共享进程池
+    // 共享进程池
     threadPool: happyThreadPool,
     verbose: false,
   })
@@ -168,27 +168,27 @@ config.module.rules.push({
     name: 'images/[name]-[hash].[ext]'
   },
 })
-  // font and svg
-  ;[
-    ['woff', 'application/font-woff'],
-    ['woff2', 'application/font-woff2'],
-    ['otf', 'font/opentype'],
-    ['ttf', 'application/octet-stream'],
-    ['eot', 'application/vnd.ms-fontobject'],
-    ['svg', 'image/svg+xml'],
-  ].forEach((font) => {
-    const extension = font[0]
-    const mimetype = font[1]
-    config.module.rules.push({
-      test: new RegExp(`\\.${extension}$`),
-      loader: 'url-loader',
-      options: {
-        name: 'fonts/[name]-[hash].[ext]',
-        limit: 10000,
-        mimetype,
-      },
-    })
+// font and svg
+;[
+  ['woff', 'application/font-woff'],
+  ['woff2', 'application/font-woff2'],
+  ['otf', 'font/opentype'],
+  ['ttf', 'application/octet-stream'],
+  ['eot', 'application/vnd.ms-fontobject'],
+  ['svg', 'image/svg+xml'],
+].forEach((font) => {
+  const extension = font[0]
+  const mimetype = font[1]
+  config.module.rules.push({
+    test: new RegExp(`\\.${extension}$`),
+    loader: 'url-loader',
+    options: {
+      name: 'fonts/[name]-[hash].[ext]',
+      limit: 10000,
+      mimetype,
+    },
   })
+})
 // hot server
 if (__DEV__) {
   config.entry.main.push(
@@ -230,7 +230,7 @@ config.plugins.push(
 )
 if (__PROD__) {
   config.optimization.minimizer = [
-    //mini js
+    // mini js
     new TerserPlugin({
       terserOptions: {
         ecma: undefined,
@@ -248,10 +248,10 @@ if (__PROD__) {
         safari10: false,
       },
     }),
-    //mini css
+    // mini css
     new OptimizeCSSAssetsPlugin({})
   ]
-  //separate css
+  // separate css
   config.plugins.push(new MiniCssExtractPlugin({
     filename: __DEV__ ? 'css/[name].css' : 'css/[name].[contenthash].css',
     chunkFilename: __DEV__ ? 'css/[id].css' : 'css/[id].[hash].css'
