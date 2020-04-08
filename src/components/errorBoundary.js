@@ -23,7 +23,7 @@ class ErrorBoundary extends React.PureComponent {
       // Error path
       return (
         <Result
-          status='error'
+          status='warning'
           title='Something went wrong!'
           subTitle='Please check and modify the following information'
         >

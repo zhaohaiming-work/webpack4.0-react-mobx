@@ -29,7 +29,7 @@ function Toolbar (props) {
       <ThemedButton />
       <Route path='/example/test' component={() => {
         return (
-          <div>测试页面</div>
+          <div>小笨猪</div>
         )
       }} />
     </div>
@@ -45,7 +45,7 @@ export default function Button ({ name }) {
   return <div>
     <AppContext.Provider value={{
       username: '小金猪',
-      title: '大神'
+      title: '大神来了'
     }}>
       <div className='App'>
         <Navbar />
@@ -53,5 +53,6 @@ export default function Button ({ name }) {
       </div>
     </AppContext.Provider>
     <button onClick={handleClick}>{buttonText}{name}</button>
+    测试组件111
   </div>
 }
