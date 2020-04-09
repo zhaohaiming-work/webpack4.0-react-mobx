@@ -14,7 +14,6 @@ const Login = lazy(() => import('./routes/Login/index'))
 const NotFound = lazy(() => import('components/404'))
 class App extends React.PureComponent {
   render () {
-    console.log(Base)
     return (
       <ErrorBoundary>
         <Provider {...store}>
