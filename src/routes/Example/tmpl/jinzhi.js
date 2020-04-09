@@ -8,6 +8,9 @@ import { withRouter } from 'react-router-dom'
 const ref = React.createRef()
 const WithRef = (WrappedComponent) => {
   class Enhance extends React.PureComponent {
+    componentDidMount () {
+      console.log(this.props.forwardedRef.current.add())
+    }
     componentWillReceiveProps (nextProps) {
       console.log('Current props', this.props)
       console.log('Next props', nextProps)
@@ -28,8 +31,11 @@ const WithRef = (WrappedComponent) => {
 }
 @WithRef
 class Aaa extends React.PureComponent {
-  constructor () {
-    super()
+  state={
+    name:'666'
+  }
+  add () {
+    console.log('9999')
   }
   render () {
     return <button>小笨猪</button>
@@ -41,10 +47,6 @@ class Aaa extends React.PureComponent {
 class App extends React.Component {
   static propTypes = {
     example: PropTypes.object
-  }
-  constructor (props) {
-    super(props)
-    // this.lalala = React.createRef()
   }
   componentDidMount () {
     // console.log(this.props)
