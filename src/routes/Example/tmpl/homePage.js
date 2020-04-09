@@ -61,7 +61,6 @@ class App extends React.Component {
           {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
         </div>
         <Table dataSource={dataSource} columns={columns} size='small' />
-        {this.props.children}
       </div>
     )
   }

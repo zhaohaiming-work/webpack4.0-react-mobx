@@ -12,9 +12,19 @@ export default mergeRoute([
       {
         path: '/test',
         tmpl: Test,
+        children:[
+          {
+            path: '/jinzhi',
+            tmpl: Jinzhi,
+          },
+          {
+            path: '/lalala',
+            tmpl: Jinzhi,
+          }
+        ]
       },
       {
-        path: '/jinzhi',
+        path: '/xiaozhu',
         tmpl: Jinzhi,
       }
     ]
