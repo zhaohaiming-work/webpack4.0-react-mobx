@@ -75,8 +75,8 @@ export const listenersEvent = eventName => Tmpl => {
     }
     componentWillUnmount () {
       this.handleFun()
-      this.eventName = []
-      this.hasRunBlankFun = false
+      // this.eventName = []
+      // this.hasRunBlankFun = false
     }
     render () {
       return <Tmpl
