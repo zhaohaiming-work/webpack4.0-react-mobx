@@ -3,6 +3,7 @@ import mergeRoute from 'components/mergeRoutes'
 const Home = React.lazy(() => import('./tmpl/homePage'))
 const Test = React.lazy(() => import('./tmpl/test'))
 const Jinzhi = React.lazy(() => import('./tmpl/jinzhi'))
+const Xiaozhu = React.lazy(() => import('./tmpl/xiaozhu'))
 
 export default mergeRoute([
   {
@@ -30,7 +31,7 @@ export default mergeRoute([
     ]
   },
   {
-    path: '/jinzhi',
-    tmpl: Jinzhi
+    path: '/xiaozhu',
+    tmpl: Xiaozhu
   },
 ])
