@@ -45,10 +45,11 @@ export const listenersEvent = eventName => Tmpl => {
         this.eventName.forEach(v => {
           console.warn('缺少' + v + '事件对应的回调函数')
         })
-        this.hasRunBlankFun = true
-      } else {
-        this.hasRunBlankFun = false
+        // this.hasRunBlankFun = true
       }
+      // else {
+      this.hasRunBlankFun = true
+      // }
     }
     handleFun = type => {
       try {
