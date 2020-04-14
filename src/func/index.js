@@ -85,3 +85,43 @@ export const listenersEvent = eventName => Tmpl => {
     }
   }
 }
+/*
+* 实现自定义的N次连续点击
+* manyClick(clickNum, callFunc)
+* 必填：clickNum 点击次数 [1, 10]
+* 必填：callFunc 回调函数
+* */
+let clickBeforeTime = 0
+let clickCount = 0
+const manyClick = (clickNum, callFunc) => {
+  // 安全校验
+  if (typeof clickNum !== 'number') { console.info('manyClick(clickNum, callFunc)的点击次数为number类型'); return }
+  if (!callFunc) { console.info('manyClick(clickNum, callFunc)无回调函数'); return }
+  // 处理clickCount的新值情况
+  if (clickCount === 0) {
+    clickCount = clickNum
+  } else {
+    if (clickCount < 1 || clickCount > 10) { clickCount = 1 } /* 只准1击至10击，其他情况默认1击 */
+  }
+  // 处理点击之时差
+  let clickTime = Date.parse(new Date()) + (new Date()).getMilliseconds() // 毫秒时间戳
+  if ((clickTime - clickBeforeTime) < 400) { // 下一次点击是否成功
+    clickBeforeTime = Date.parse(new Date()) + (new Date()).getMilliseconds(); clickCount--
+  } else { // 第一次点击
+    clickBeforeTime = Date.parse(new Date()) + (new Date()).getMilliseconds()
+    if (clickCount < clickNum) { /* 清除历史不成功点击的参数 */
+      clickCount = clickNum
+    }
+  }
+  // N次成功点击后启用回调函数，并初始化clickCount
+  if (clickCount === 1) {
+    callFunc('回调函数不需要传参'); clickCount = 0 /* 初始化点击次数 */
+  }
+}
+
+/*
+* 多击事件
+* */
+export const selfClick = (num = 3, callFunc) => {
+  manyClick(num, callFunc)
+}

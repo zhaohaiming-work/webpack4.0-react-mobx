@@ -5,7 +5,7 @@ import { Button, Tag, Input, Table } from 'antd'
 import '../style'
 import Test from './test'
 import { withRouter } from 'react-router-dom'
-import { withRef, listenersEvent, eventEmitter } from 'func'
+import { withRef, listenersEvent, eventEmitter, selfClick } from 'func'
 
 @listenersEvent(['add', 'xiaojinzhu', 'haiming', 'lalala'])
 @withRef
@@ -31,6 +31,11 @@ class App extends React.Component {
     console.log(val.target.value)
     this.setState({ value:val.target.value.trim() })
   }
+  three=() => {
+    selfClick(3, () => {
+      console.log('点击了三次')
+    })
+  }
   render () {
     return (
       <div>
@@ -38,6 +43,7 @@ class App extends React.Component {
         <Input onChange={this.change} />
         <button onClick={this.add}>点我</button>
         <button onClick={this.zaidianwo}>再点我</button>
+        <button onClick={this.three}>三击</button>
       </div>
     )
   }
