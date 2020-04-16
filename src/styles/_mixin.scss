@@ -1,0 +1,72 @@
+@mixin border-radius {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: red;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin size ($w, $h) {
+  width: $w;
+
+  @if $h {
+    height: $h;
+  }
+
+  @else {
+    height: $w;
+  }
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+.font-13{
+  font-size: 13px;
+}
+.font-12{
+  font-size: 12px;
+}
+.font-15{
+  font-size: 15px;
+}
+.font-16{
+  font-size: 16px;
+}

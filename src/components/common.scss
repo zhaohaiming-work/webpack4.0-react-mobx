@@ -1,0 +1,15 @@
+.loading-process {
+  height: 2px;
+  background: #1890ff;
+  width: 100%;
+  animation: loading 0.2s linear infinite;
+}
+
+@keyframes loading {
+  from {
+    width: 0;
+  }
+  to {
+    background: 100%;
+  }
+}
