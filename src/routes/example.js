@@ -1,19 +1,20 @@
-import React from 'react'
 import mergeRoute from 'components/merge-routes'
-const Home = React.lazy(() => import('./tmpl/home-page'))
-const Test = React.lazy(() => import('./tmpl/test'))
-const Jinzhi = React.lazy(() => import('./tmpl/jinzhi'))
-const Xiaozhu = React.lazy(() => import('./tmpl/xiaozhu'))
+import {
+  ExampleTest,
+  ExampleHome,
+  Jinzhi,
+  Xiaozhu
+} from 'pages/example'
 
 export default mergeRoute([
   {
     path: '/example',
-    tmpl: Home,
-    children:[
+    tmpl: ExampleHome,
+    children: [
       {
         path: '/test',
-        tmpl: Test,
-        children:[
+        tmpl: ExampleTest,
+        children: [
           {
             path: '/jinzhi',
             tmpl: Jinzhi,

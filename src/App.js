@@ -7,10 +7,10 @@ import store from 'store'
 import { Provider } from 'mobx-react'
 import Home from 'pages/home'
 import PageLayout from 'layout'
-import Base from './routes'
+import Base from 'routes'
 import zhCN from 'antd/es/locale-provider/zh_CN'
 import ErrorBoundary from 'components/error-boundary'
-const Login = lazy(() => import('./routes/login/index'))
+const Login = lazy(() => import('pages/login/index'))
 const NotFound = lazy(() => import('components/404'))
 class App extends React.PureComponent {
   render () {
