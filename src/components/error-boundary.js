@@ -35,7 +35,7 @@ class ErrorBoundary extends React.PureComponent {
                   fontSize: 16,
                 }}
               >
-                  The content  has the following error:
+                The content  has the following error:
               </Text>
             </Paragraph>
             <Paragraph>
