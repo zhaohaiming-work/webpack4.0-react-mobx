@@ -3,64 +3,59 @@ import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import { Button, Tag, Input, Table } from 'antd'
 import '../style'
-import Test from './test'
-@inject('example')
-@observer
+
+const xuhua = (Tmpl) => {
+  class Xu extends Tmpl {
+    state = {
+      name:'pangzhu',
+      ...this.state
+    }
+    componentDidMount () {
+      super.componentDidMount()
+    }
+    add () {
+      console.log('我是你的小可爱')
+    }
+    render () {
+      return <div>
+        <button>{this.props.num}</button>
+        {super.render()}
+      </div>
+    }
+  }
+  return Xu
+}
+
+@xuhua
+class Bbbb extends React.Component {
+  componentDidMount () {
+    this.add()
+  }
+  render () {
+    return <div>{this.props.num}</div>
+  }
+}
+
 class App extends React.Component {
   static propTypes = {
     example: PropTypes.object
   }
+  state = {
+    jinzhu: '小金猪',
+    count:0
+  }
   componentDidMount () {
-    // console.log(this.props)
     // this.props.example.getDate()
   }
-  add = () => {
-
+  aaa=() => {
+    this.setState({ count:this.state.count + 1 })
   }
   render () {
-    const { todos, count, add, dateList, unfinishedTodos } = this.props.example
-    const dataSource = [
-      {
-        key: '1',
-        name: '胡彦斌',
-        age: 32,
-        address: '西湖区湖底公园1号',
-      },
-      {
-        key: '2',
-        name: '胡彦祖',
-        age: 42,
-        address: '西湖区湖底公园1号',
-      },
-    ]
-
-    const columns = [
-      {
-        title: '姓名',
-        dataIndex: 'name',
-        key: 'name',
-      },
-      {
-        title: '年龄',
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: '住址',
-        dataIndex: 'address',
-        key: 'address',
-      },
-    ]
     return (
       <div>
-        {/* <Test name='传进来的值' /> */}
-        <Tag>Tag 1</Tag>
-        <Input placeholder='Basic usage' />
-        <Button onClick={add}>点我</Button>
-        <div className='pd-10'>
-          {dateList.map((v, i) => <Tag key={i}>{v.periodStr}</Tag>)}
-        </div>
-        <Table dataSource={dataSource} columns={columns} size='small' />
+        我是大神，你是什么，我的天呢 {this.state.count}
+        <button onClick={this.aaa}>甲乙</button>
+        <Bbbb num={'一点点'} />
       </div>
     )
   }

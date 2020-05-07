@@ -5,8 +5,11 @@ const { env, basePath, externals, main,
   sourcemaps } = require('../project.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const PnpWebpackPlugin = require('pnp-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 const HappyPack = require('happypack')
 const os = require('os')
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
@@ -50,7 +53,7 @@ const config = {
     alias: {
       '@': resolve(srcDir),
       pages: resolve(`${srcDir}/views`),
-      routes:resolve(`${srcDir}/routes`),
+      routes: resolve(`${srcDir}/routes`),
       layout: resolve(`${srcDir}/page-layout`),
       components: resolve(`${srcDir}/components`),
       mobx: path.resolve(__dirname, '../node_modules/mobx/lib/mobx.js'),
@@ -60,7 +63,16 @@ const config = {
       func: resolve(`${srcDir}/func`),
       mixin: resolve(`${srcDir}/styles/_mixin.scss`),
       style: resolve(`${srcDir}/styles`)
-    }
+    },
+    // add pnp
+    plugins: [
+      PnpWebpackPlugin
+    ]
+  },
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module),
+    ]
   },
   externals,
   module: {
@@ -196,6 +208,8 @@ if (__DEV__) {
     `webpack-hot-middleware/client.js?path=${config.output.publicPath}__webpack_hmr`
   )
   config.plugins.push(
+    new WatchMissingNodeModulesPlugin(resolve('node_modules')),
+    new CaseSensitivePathsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   )
@@ -221,12 +235,10 @@ config.optimization = {
     }
   }
 }
-// moment 去除语言包，减少体积
 config.plugins.push(
-  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-)
-// 碰到错误warning但是不停止编译
-config.plugins.push(
+  // moment 去除语言包，减少体积
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  // 碰到错误warning但是不停止编译
   new webpack.NoEmitOnErrorsPlugin()
 )
 if (__PROD__) {
