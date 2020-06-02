@@ -43,7 +43,7 @@ class App extends React.Component {
         <Input onChange={this.change} />
         <button onClick={this.add}>点我</button>
         <button onClick={this.zaidianwo}>再点我</button>
-        <button onClick={this.three}>三击</button>
+        <Button type='primary' onClick={this.three}>三击</Button>
       </div>
     )
   }

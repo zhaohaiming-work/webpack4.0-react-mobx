@@ -1,7 +1,7 @@
 import React from 'react'
-import { createHashHistory } from 'history'
+import { createBrowserHistory } from 'history'
 import PropTypes from 'prop-types'
-export const history = createHashHistory()
+export const history = createBrowserHistory()
 const EventEmitter = require('events').EventEmitter
 export const eventEmitter = new EventEmitter()
 export const withRef = (WrappedComponent) => {

@@ -1,6 +1,6 @@
 import './styles'
 import React, { Suspense, lazy } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 import Loadable from 'components/loadable'
 import store from 'store'
@@ -18,7 +18,7 @@ class App extends React.PureComponent {
       <ErrorBoundary>
         <Provider {...store}>
           <ConfigProvider locale={zhCN}>
-            <HashRouter>
+            <BrowserRouter>
               <Suspense fallback={Loadable}>
                 <Switch>
                   <Route exact path='/login' component={Login} />
@@ -33,7 +33,7 @@ class App extends React.PureComponent {
                   )} />
                 </Switch>
               </Suspense>
-            </HashRouter>
+            </BrowserRouter>
           </ConfigProvider>
         </Provider>
       </ErrorBoundary>
