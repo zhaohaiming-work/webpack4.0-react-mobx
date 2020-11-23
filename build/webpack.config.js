@@ -100,7 +100,7 @@ const babelLoader = {
     plugins: [
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-export-default-from',
-      '@babel/plugin-transform-runtime',
+      ['@babel/plugin-transform-runtime', { corejs: 3 }],
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       ['import', {
@@ -114,7 +114,7 @@ const babelLoader = {
       ['@babel/preset-env', {
         modules: false,
         loose: true,
-        // useBuiltIns: "usage",
+        // useBuiltIns: 'usage',
         targets: {
           ie: 9,
           browsers: [

@@ -3,7 +3,7 @@
    2) Promise
    3) Fetch
 ====================================================== */
-import 'babel-polyfill'
+// import 'babel-polyfill'
 // 1) Object.assign
 Object.assign = require('object-assign')
 

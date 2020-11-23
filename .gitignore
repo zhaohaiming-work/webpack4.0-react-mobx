@@ -8,3 +8,4 @@ coverage
 .git
 dist
 *.zip
+yarn.lock
