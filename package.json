@@ -81,7 +81,7 @@
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-normalize": "8.0.1",
-    "react-dev-utils": "^10.2.1",
+    "react-dev-utils": "^11.0.4",
     "redbox-react": "^1.6.0",
     "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
